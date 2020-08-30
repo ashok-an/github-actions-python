@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 
 import argparse
-
 import op
 
-if __name__ == '__main__':
+
+def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('-op', '--op', required=True,
                         choices=['add', 'sub', 'mul', 'div'])
@@ -12,15 +12,24 @@ if __name__ == '__main__':
     parser.add_argument('-b', type=int, required=True)
 
     args = parser.parse_args()
+    return args.op, args.a, args.b
 
+
+def main(oper=None, a=0, b=0):
+    if not(all([oper, a, b])):
+        oper, a, b = parse_args()
     result = None
-    if args.op == 'add':
-        result = op.add(args.a, args.b)
-    elif args.op == 'sub':
-        result = op.sub(args.a, args.b)
-    elif args.op == 'mul':
-        result = op.mul(args.a, args.b)
+    if oper == 'add':
+        result = op.add(a, b)
+    elif oper == 'sub':
+        result = op.sub(a, b)
+    elif oper == 'mul':
+        result = op.mul(a, b)
     else:
-        result = op.div(args.a, args.b)
+        result = op.div(a, b)
 
-    print(f'do({args.a} {args.op} {args.b}) = {result}')
+    print(f'do({a} {oper} {b}) = {result}')
+
+
+if __name__ == '__main__':
+    main()
