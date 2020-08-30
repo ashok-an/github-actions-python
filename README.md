@@ -5,3 +5,4 @@ Simulate the working of github-actions on a sample python repo
 Simple calculator kind-of program with
 - flake8
 - pytest --coverage (65%)
+- mypy (TODO)
